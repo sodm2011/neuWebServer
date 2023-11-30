@@ -11,8 +11,10 @@ import session from "express-session";
 import mongoose from 'mongoose';
 
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas"
-mongoose.connect(CONNECTION_STRING);
+mongoose.connect(CONNECTION_STRING).then(() => console.log("Connected to MongoDB"))
+.catch(err => console.error("Could not connect to MongoDB", err));
 
+console.log("Connected to MongoDB", CONNECTION_STRING)
 
 const app = express()
 app.use(cors({
